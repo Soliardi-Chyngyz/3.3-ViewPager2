@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/title"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/amita"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:fontFamily="@font/amita"
+        android:id="@+id/content"
+        android:text="@string/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:fontFamily="@font/amita"
+        android:id="@+id/user"
+        android:text="@string/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:fontFamily="@font/amita"
+        android:id="@+id/group"
+        android:text="@string/group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
