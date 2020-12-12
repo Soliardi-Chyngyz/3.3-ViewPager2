@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AlertDialogCustom" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:textColor">#A55656</item>
+        <item name="android:typeface">monospace</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="backgroundColor">#34736A</item>
+        <item name="fontFamily">@font/amita</item>
+    </style>
+</resources>

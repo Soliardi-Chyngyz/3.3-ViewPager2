@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpager2.R;
 import com.example.viewpager2.data.models.Poost;
 import com.example.viewpager2.data.models.network.GhibliService;
-import com.example.viewpager2.ui.MainActivity;
 import com.example.viewpager2.ui.adapters.PostAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -77,27 +78,36 @@ public class ListFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("post", list.get(position));
-                MainActivity.pressed();
+                bundle.putSerializable("post", adapter.getPost(position));
+//                setArguments(bundle);
+                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_listFragment2_to_addFragment, bundle);
+
             }
 
             @Override
             public void onLongListener(int position) {
-                DialogInterface.OnClickListener dialog = ((dialogInterface, i) -> {
-                    switch (i){
+                new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AlertDialogCustom));
+                DialogInterface.OnClickListener dialog = (dialogInterface1, i) -> {
+                    switch (i) {
                         case DialogInterface.BUTTON_POSITIVE:
                             adapter.deleteFromBack(position);
                             adapter.deleteItem(position);
                         case DialogInterface.BUTTON_NEGATIVE:
                             break;
                     }
-                });
+                };
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Are you sure?")
                         .setPositiveButton("Yes", dialog)
                         .setNegativeButton("No", dialog).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAllPostsFromBackUp();
     }
 
     private void getAllPostsFromBackUp() {
@@ -129,7 +139,7 @@ public class ListFragment extends Fragment {
 
     private void initListeners() {
         fab.setOnClickListener(view -> {
-            MainActivity.pressed();
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_listFragment2_to_addFragment);
         });
     }
 
@@ -143,7 +153,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
+
 }

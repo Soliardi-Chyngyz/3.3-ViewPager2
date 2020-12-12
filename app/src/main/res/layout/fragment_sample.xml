@@ -14,6 +14,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -29,6 +30,7 @@
         android:id="@+id/in_user"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
+        app:endIconMode="clear_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
@@ -45,6 +47,7 @@
         android:id="@+id/in_group"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+        app:endIconMode="clear_text"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
@@ -62,6 +65,7 @@
         android:layout_width="match_parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -81,6 +85,6 @@
         android:background="#4D9595"
         android:fontFamily="@font/amita"
         android:shadowRadius="@android:integer/config_mediumAnimTime"
-        android:text="Add" />
+        android:text="@string/addition" />
 
 </LinearLayout>

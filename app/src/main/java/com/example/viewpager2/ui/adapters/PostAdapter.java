@@ -33,6 +33,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         notifyDataSetChanged();
     }
 
+    public Poost getPost(int selectedPosition) {
+        return postList.get(selectedPosition);
+    }
+
     public void addItem(Poost post) {
         this.postList.add(post);
         notifyDataSetChanged();
@@ -69,7 +73,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         notifyDataSetChanged();
     }
 
-    public void deleteFromBack(int position){
+    public void deleteFromBack(int position) {
         GhibliService.getApiInterface().deleteId(position).enqueue(new Callback<Poost>() {
             @Override
             public void onResponse(Call<Poost> call, Response<Poost> response) {

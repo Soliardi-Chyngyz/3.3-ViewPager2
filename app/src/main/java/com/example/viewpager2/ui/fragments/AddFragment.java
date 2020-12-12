@@ -2,22 +2,23 @@ package com.example.viewpager2.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.viewpager2.R;
 import com.example.viewpager2.data.models.Poost;
 import com.example.viewpager2.data.models.network.GhibliService;
-import com.example.viewpager2.ui.MainActivity;
 import com.example.viewpager2.ui.adapters.PostAdapter;
+import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,19 +33,18 @@ public class AddFragment extends Fragment {
     //    private TextView tvFragmentName;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.ed_title)
-    EditText title;
+    TextInputEditText title;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.ed_user)
-    EditText user;
+    TextInputEditText user;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.ed_group)
-    EditText group;
+    TextInputEditText group;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.ed_content)
-    EditText content;
+    TextInputEditText content;
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.btn_add)
-    Button btn_add;
+    private Button btn_add;
     private Unbinder unbinder;
     private String fragmentName;
     private PostAdapter postAdapter;
@@ -64,7 +64,6 @@ public class AddFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
 //            fragmentName = getArguments().getString(ARG_PARAM1);
         }
@@ -81,20 +80,21 @@ public class AddFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        tvFragmentName = view.findViewById(R.id.hello);
-
+        btn_add = view.findViewById(R.id.btn_add);
         getData();
-
         // broadcast riceaver
-        if (btn_add != null)
-            btn_add.setOnClickListener(view1 -> {
+        btn_add.setOnClickListener(view1 -> {
+            if (content != null)
                 saveOnBack();
-            });
+        });
+
     }
 
     private void getData() {
         if (getArguments() != null) {
+            btn_add.setText("Change");
             Poost poost = (Poost) getArguments().getSerializable("post");
+            Log.d("TAG", "getData: " + poost.getTitle());
             if (poost != null) {
                 title.setText(poost.getTitle());
                 user.setText(poost.getUser());
@@ -104,6 +104,7 @@ public class AddFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void saveOnBack() {
         String sTitle = title.getText().toString().trim();
         String sUser = user.getText().toString().trim();
@@ -112,9 +113,10 @@ public class AddFragment extends Fragment {
 
         Poost post = new Poost(sTitle, sContent, sUser, sGroup);
 //        ListFragment.newInstance(post);
-
         if (getArguments() != null) {
-            GhibliService.getApiInterface().changePutById(post.getId(), post).enqueue(new Callback<Poost>() {
+
+            Poost poost = (Poost) getArguments().getSerializable("post");
+            GhibliService.getApiInterface().changePutById(poost.getId(), post).enqueue(new Callback<Poost>() {
                 @Override
                 public void onResponse(Call<Poost> call, Response<Poost> response) {
                     Toast.makeText(getContext(), "Succeed changed", Toast.LENGTH_SHORT).show();
@@ -125,6 +127,7 @@ public class AddFragment extends Fragment {
 
                 }
             });
+
         } else {
             GhibliService.getApiInterface().setPost(post).enqueue(new Callback<Poost>() {
                 @Override
@@ -138,7 +141,8 @@ public class AddFragment extends Fragment {
                 }
             });
         }
-        MainActivity.pressedBack();
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_addFragment_to_listFragment2);
+
         title.setText("");
         user.setText("");
         content.setText("");

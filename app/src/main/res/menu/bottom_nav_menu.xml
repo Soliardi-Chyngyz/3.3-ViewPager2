@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/listFragment2"
+        android:icon="@drawable/ic_baseline_storage_24"
+        android:title="@string/main_list" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:title="@string/add" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:title="@string/title_notifications" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:title="@string/title_profile" />
+</menu>
