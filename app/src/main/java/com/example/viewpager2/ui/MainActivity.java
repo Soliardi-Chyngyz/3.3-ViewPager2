@@ -33,12 +33,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavController() {
-         BottomNavigationView navView = findViewById(R.id.nav_view);
+        final BottomNavigationView navView = findViewById(R.id.nav_view);
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.listFragment2).build();
+                R.id.listFragment2,
+                R.id.weatherFragment).build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.weatherFragment ||
+                    destination.getId() == R.id.addFragment) {
+                getSupportActionBar().hide();
+            } else {
+                getSupportActionBar().show();
+            }
+        });
 
     }
 

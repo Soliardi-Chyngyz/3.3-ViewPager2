@@ -15,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:endIconMode="clear_text"
+        android:textColorHint="@color/teal_700"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,6 +33,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         app:endIconMode="clear_text"
+        android:textColorHint="@color/teal_700"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
@@ -48,6 +52,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         app:endIconMode="clear_text"
+        android:textColorHint="@color/teal_700"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
@@ -63,6 +69,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/in_content"
         android:layout_width="match_parent"
+        android:textColorHint="@color/teal_700"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_height="wrap_content"
         app:endIconMode="clear_text"

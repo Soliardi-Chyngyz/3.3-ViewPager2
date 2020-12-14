@@ -1,7 +1,8 @@
-package com.example.viewpager2.data.models.network;
+package com.example.viewpager2.data.network;
 
 
 import com.example.viewpager2.data.models.Poost;
+import com.example.viewpager2.data.models.Weather;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
-    //region get
+    //region Poost
     @GET("posts")
     Call<List<Poost>> getPosts();
 
@@ -25,7 +26,7 @@ public interface ApiInterface {
 
     @POST("posts")
     Call<Poost> setPost(
-        @Body Poost post
+            @Body Poost post
     );
 
     @PUT("posts/{putId}")
@@ -39,4 +40,9 @@ public interface ApiInterface {
             @Path("deleteId") int delete
     );
 //endregion
+
+    //region Weather
+    @GET("data/2.5/weather?q=bishkek&appid=913e348f7d9a9cc2cd2a853bce5aa8e0")
+    Call<Weather> getWeather();
+    //endregion
 }

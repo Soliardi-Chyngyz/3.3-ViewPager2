@@ -8,11 +8,17 @@
     <string name="content">Content</string>
     <string name="user">User</string>
     <string name="group">Group</string>
-    <string name="main_list">Main list</string>
     <string name="title_dashboard" />
     <string name="title_notifications" />
     <string name="title_profile" />
     <string name="add">ADD</string>
     <string name="addition">Add</string>
-    <string name="sos">Sos</string>
+    <string name="main_list">Main list</string>
+    <string name="weather">Weather</string>
+    <string name="time">Time</string>
+    <string name="kyrgyzland">Kyrgyzland</string>
+    <string name="bishkek">Bishkek</string>
+    <string name="humid">humid</string>
+    <string name="barometer">barometer</string>
+    <string name="wind">wind</string>
 </resources>

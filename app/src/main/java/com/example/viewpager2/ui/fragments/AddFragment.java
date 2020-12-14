@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.example.viewpager2.R;
 import com.example.viewpager2.data.models.Poost;
-import com.example.viewpager2.data.models.network.GhibliService;
+import com.example.viewpager2.data.network.GhibliService;
 import com.example.viewpager2.ui.adapters.PostAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 

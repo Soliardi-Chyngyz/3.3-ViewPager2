@@ -7,8 +7,9 @@
         android:title="@string/main_list" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:title="@string/add" />
+        android:id="@+id/weatherFragment"
+        android:icon="@drawable/ic_baseline_coronavirus_24"
+        android:title="@string/weather" />
 
     <item
         android:id="@+id/navigation_notifications"
