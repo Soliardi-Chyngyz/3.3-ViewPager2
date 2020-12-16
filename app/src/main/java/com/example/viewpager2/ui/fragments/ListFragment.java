@@ -1,11 +1,15 @@
 package com.example.viewpager2.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -54,13 +58,14 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new PostAdapter(list);
+        adapter = new PostAdapter();
         args = this.getArguments();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
@@ -72,7 +77,7 @@ public class ListFragment extends Fragment {
         init();
         initListeners();
         setToAdapter();
-        getAllPostsFromBackUp();
+//        getUserData();
 
         adapter.setOnClickListener(new PostAdapter.ItemClickListener() {
             @Override
@@ -81,7 +86,6 @@ public class ListFragment extends Fragment {
                 bundle.putSerializable("post", adapter.getPost(position));
 //                setArguments(bundle);
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_listFragment2_to_addFragment, bundle);
-
             }
 
             @Override
@@ -110,6 +114,20 @@ public class ListFragment extends Fragment {
         getAllPostsFromBackUp();
     }
 
+    private void getAllPosts(){
+        GhibliService.getApiInterface().getPosts().enqueue(new Callback<List<Poost>>() {
+            @Override
+            public void onResponse(Call<List<Poost>> call, Response<List<Poost>> response) {
+                adapter.setList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Poost>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void getAllPostsFromBackUp() {
         GhibliService.getApiInterface().getPosts().enqueue(
                 new Callback<List<Poost>>() {
@@ -118,7 +136,12 @@ public class ListFragment extends Fragment {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.i("TAG", "onResponse: " + response.body());
                             adapter.setList(response.body());
-                            recyclerView.setAdapter(adapter);
+                            if(getArguments() != null) {
+                                Poost poost = (Poost) getArguments().getSerializable("user");
+                                if (poost != null) {
+                                    adapter.sortByUserName(poost.getUser());
+                                }
+                            }
                         }
                     }
 
@@ -155,4 +178,24 @@ public class ListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_log_out:
+                requireActivity().finish();
+                System.exit(0);
+                break;
+            case R.id.action_sort:
+                list.clear();
+                getAllPosts();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

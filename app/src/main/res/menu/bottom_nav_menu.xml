@@ -12,8 +12,9 @@
         android:title="@string/weather" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:title="@string/title_notifications" />
+        android:id="@+id/usersFragment"
+        android:icon="@drawable/icon"
+        android:title="@string/users" />
 
     <item
         android:id="@+id/navigation_profile"

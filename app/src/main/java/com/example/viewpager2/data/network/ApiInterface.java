@@ -39,6 +39,9 @@ public interface ApiInterface {
     Call<Poost> deleteId(
             @Path("deleteId") int delete
     );
+
+    @DELETE("posts")
+    Call<List<Poost>> deleteAll();
 //endregion
 
     //region Weather

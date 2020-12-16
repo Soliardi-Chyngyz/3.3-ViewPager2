@@ -1,5 +1,6 @@
 package com.example.viewpager2.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.example.viewpager2.R;
 import com.example.viewpager2.data.models.Poost;
 import com.example.viewpager2.data.network.GhibliService;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,12 +23,25 @@ import retrofit2.Response;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
-    private List<Poost> postList;
+    private List<Poost> postList = new ArrayList<>();
     private ItemClickListener listener;
     private int selectedPosition = 0;
 
-    public PostAdapter(List<Poost> list) {
-        this.postList = list;
+    public PostAdapter() {
+    }
+
+    public void cleanList() {
+        postList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void sortByUserName(String userName) {
+        Iterator<Poost> iter = postList.iterator();
+        while (iter.hasNext()) {
+            if (!iter.next().getUser().equals(userName)){
+                iter.remove();
+            }
+        }
     }
 
     public void setList(List<Poost> postList) {
@@ -37,7 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return postList.get(selectedPosition);
     }
 
-    public void addItem(Poost post) {
+    public void setPost(Poost post) {
         this.postList.add(post);
         notifyDataSetChanged();
     }
@@ -63,7 +79,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         notifyItemChanged(0);
     }
 
-    public void updateData() {
+
+    public void updateData(List<Poost> list) {
+        this.postList = list;
         notifyDataSetChanged();
     }
 
@@ -117,6 +135,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             });
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(Poost post, int position) {
             if (post != null) {
                 this.post = post;

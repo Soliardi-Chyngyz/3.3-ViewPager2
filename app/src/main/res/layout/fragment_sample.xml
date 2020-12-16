@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amita"
-            android:hint="Put user" />
+            android:inputType="textCapWords"
+            android:hint="@string/put_user" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

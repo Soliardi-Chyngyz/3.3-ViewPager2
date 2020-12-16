@@ -28,4 +28,13 @@
         android:name="com.example.viewpager2.ui.fragments.WeatherFragment"
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.example.viewpager2.ui.fragments.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_listFragment2"
+            app:destination="@id/listFragment2" />
+    </fragment>
 </navigation>
