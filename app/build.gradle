@@ -40,9 +40,12 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.2'
     implementation 'androidx.navigation:navigation-ui:2.3.2'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.1' // только для теста java кода
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
     // он добавляет слушателя
     implementation "androidx.fragment:fragment:1.3.0-beta02"
@@ -63,4 +66,13 @@ dependencies {
 
     // picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // test Fragment
+    androidTestImplementation 'com.21buttons:fragment-test-rule:2.0.1'
+    debugImplementation 'com.21buttons:fragment-test-rule-extras:2.0.1'
+
+    // room test
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }
