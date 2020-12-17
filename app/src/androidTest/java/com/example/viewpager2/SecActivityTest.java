@@ -21,16 +21,9 @@ public class SecActivityTest {
     public ActivityScenarioRule<SecondActivity> activityRule
             = new ActivityScenarioRule<>(SecondActivity.class);
 
-    /**
-     * @Test public void sampleTest(){
-     * onView(withId(R.id.sec_act_edit)).perform(typeText("Hi man, What's up!"));
-     * onView(withId(R.id.apply)).perform(click());
-     * }
-     */
-
     @Test
     public void addTest() {
-        for (int i = 0; i < 4  ; i++) {
+        for (int i = 0; i < 4; i++) {
             onView(withId(R.id.sec_act_edit)).perform(typeText("4"));
             onView(withId(R.id.sec_act_edit_2)).perform(typeText("4"));
             onView(withId(R.id.apply)).perform(click());

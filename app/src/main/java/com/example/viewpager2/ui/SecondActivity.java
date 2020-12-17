@@ -33,7 +33,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         btnApply.setOnClickListener(this);
 
 //        testDB();
-
 //        findViewById(R.id.apply).setOnClickListener(view -> findViewById(R.id.apply).setVisibility(View.INVISIBLE));
     }
 
@@ -68,12 +67,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             } else if (i == 3) {
                 String sum = String.valueOf(math.multiply(oper1, oper2));
                 editTxtClean(sum);
-            } else if (i == 4) {
+            } else {
                 String sum = String.valueOf(math.divide(oper1, oper2));
                 editTxtClean(sum);
             }
         } else {
-            Toast.makeText(this, "Так нельзя делать, ай ай ай!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Так делать нельзя, ай ай ай!", Toast.LENGTH_SHORT).show();
         }
     }
 
